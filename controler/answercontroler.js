@@ -53,10 +53,14 @@ const createAnswer = async (req, res) => {
   }
 };
 
-// Get all answers
+// Get all answers with usernames
 const allAnswers = async (req, res) => {
   try {
-    const [answers] = await dbConnection.query("SELECT * FROM answer");
+    const [answers] = await dbConnection.query(`
+      SELECT answer.*, users.username
+      FROM answer
+      JOIN users ON answer.userId = users.userid
+    `);
     return res.status(StatusCodes.OK).json({ answers });
   } catch (error) {
     console.error(error.message);

@@ -7,10 +7,15 @@ const { v4: uuidv4 } = require("uuid"); // Import uuidv4
 // Middleware for authentication, you need to define this
 router.use(authMiddleware);
 
-// Get all questions
+// Get all questions with usernames
 router.get("/all-questions", async (req, res) => {
   try {
-    const query = "SELECT questionid, userid, title, description FROM question";
+    const query = `
+      SELECT question.*, users.username
+      FROM question
+      JOIN users ON question.userid = users.userid
+    `;
+
     const result = await dbconnection.query(query);
 
     const rows = result[0]; // Access the first element of the result array
@@ -18,6 +23,28 @@ router.get("/all-questions", async (req, res) => {
     console.log("Questions:", rows);
 
     res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Get all answers
+router.get("/allAnswers", async (req, res) => {
+  try {
+    const query = `
+      SELECT answer.*, users.username
+      FROM answer
+      JOIN users ON answer.userid = users.userid
+    `;
+
+    const result = await dbconnection.query(query);
+
+    const rows = result[0]; // Access the first element of the result array
+
+    console.log("Answers:", rows);
+
+    res.json({ answers: rows });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
