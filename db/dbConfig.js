@@ -3,8 +3,9 @@ const dbConnection = mysql2.createPool({
   user: process.env.USER,
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
-  host: "localhost",
+  host: " sql5.freesqldatabase.com",
   connectionLimit: 10,
+  port: 3306,
 });
 
 // console.log(process.env.DATABASE)
