@@ -24,11 +24,6 @@ app.use(express.json());
 const userRoutes = require("./Routes/userRoutes");
 app.use("/api/users", userRoutes);
 
-// Define the route handler for /api/users/check
-app.get("/api/users/check", (req, res) => {
-  res.send("User check endpoint is working");
-});
-
 // question routes middleware file
 const questionRoutes = require("./Routes/questionRoutes");
 app.use("/api/question", authentMiddleware, questionRoutes);
