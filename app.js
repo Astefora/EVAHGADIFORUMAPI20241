@@ -24,7 +24,7 @@ app.use(express.json());
 const userRoutes = require("./Routes/userRoutes");
 app.use("/api/users", userRoutes);
 
-// user check route
+// Define the route handler for /api/users/check
 app.get("/api/users/check", (req, res) => {
   res.send("User check endpoint is working");
 });
