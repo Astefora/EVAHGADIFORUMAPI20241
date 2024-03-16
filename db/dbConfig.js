@@ -10,7 +10,7 @@ const dbConnection = mysql2.createPool({
 database: "sql5691589",
 user:"sql5691589",
  password:"ilqA8SC1zr" ,
-// port: "3306"
+port: "3306"
 });
 
 // console.log(process.env.DATABASE)
