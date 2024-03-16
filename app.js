@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 
 const express = require("express");
 const app = express();
@@ -23,6 +23,11 @@ app.use(express.json());
 // user routes middleware file
 const userRoutes = require("./Routes/userRoutes");
 app.use("/api/users", userRoutes);
+
+// user check route
+app.get("/api/users/check", (req, res) => {
+  res.send("User check endpoint is working");
+});
 
 // question routes middleware file
 const questionRoutes = require("./Routes/questionRoutes");
